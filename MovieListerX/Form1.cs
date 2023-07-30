@@ -8,6 +8,8 @@ namespace MovieListerX
     {
         private bool key;
         private string sub;
+
+
         private string id;
         private bool foundMatch = false;
         private bool foundMatchx = false;
@@ -24,8 +26,6 @@ namespace MovieListerX
         {
             InitializeComponent();
         }
-
-
 
         public void search()
         {
@@ -108,7 +108,7 @@ namespace MovieListerX
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata olustu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -203,9 +203,6 @@ namespace MovieListerX
                             string tconst = fields[0];
                             IMDB = fields[1];
 
-                            double.TryParse(IMDB, out IMDB_s);
-                            double.TryParse(comboBox1.Text.Trim(), out double IMDB_c);
-
                             if (tconst.Contains(id, StringComparison.OrdinalIgnoreCase))
                             {
                                 foundMatchx = true;
@@ -220,7 +217,7 @@ namespace MovieListerX
 
                 if (!foundMatchx)
                 {
-                    MessageBox.Show("IMDB Eslesme bulunamadi.", "Sonuc", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
             }
             catch (Exception ex)
