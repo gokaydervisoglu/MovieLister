@@ -8,18 +8,15 @@ namespace MovieListerX
     {
         private bool key;
         private string sub;
-
-
         private string id;
         private bool foundMatch = false;
         private bool foundMatchx = false;
 
+
         public string originalTitle;
         public string primetitle;
-        public int IMDB_movie;
-        public double IMDB_s;
         public string IMDB;
-        public string movie_imdb;
+        public string search_imdb;
         public string date;
 
         public Form1()
@@ -52,13 +49,14 @@ namespace MovieListerX
                         string line = reader.ReadLine();
                         string[] fields = line.Split('\t');
 
+                        //Data
                         string tconst = fields[0];
                         string titleType = fields[1];
+                        originalTitle = fields[3];
                         date = fields[5];
 
+                        //Convert
                         double.TryParse(date.Trim(), out double date_s);
-
-                        originalTitle = fields[3];
 
                         if (originalTitle.Contains(maskedtxt, StringComparison.OrdinalIgnoreCase) && titleType.Equals(sub, StringComparison.OrdinalIgnoreCase) && date_s >= dt)
                         {
@@ -71,7 +69,7 @@ namespace MovieListerX
                             string temp = originalTitle;
                             originalTitle = originalTitle.Trim();
 
-                            //Bosluk Isaret Sorunu
+                            //Space Sign Problem
                             if (originalTitle.Contains(maskedtxt, StringComparison.OrdinalIgnoreCase) && titleType.Equals(sub, StringComparison.OrdinalIgnoreCase) && date_s >= dt)
                             {
                                 foundMatch = true;
@@ -79,7 +77,7 @@ namespace MovieListerX
                                 break;
                             }
 
-                            //Noktalama Isaret Sorunu
+                            //Punctuation Problem
                             else
                             {
                                 originalTitle = temp;
@@ -108,10 +106,9 @@ namespace MovieListerX
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public void searchx()
         {
             string maskedtxt = textBox1.Text.Trim();
@@ -127,7 +124,6 @@ namespace MovieListerX
             }
 
             double.TryParse(comboBox2.Text.Trim(), out double dt);
-
 
             try
             {
@@ -173,20 +169,17 @@ namespace MovieListerX
                 }
                 else
                 {
-                    MessageBox.Show("Eslesme bulunamadi.");
                     foundMatchx = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata olustu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public void raiting()
         {
-
-            string maskedtxt = textBox1.Text.Trim();
             string filePath = "raiting.tsv";
 
             try
@@ -206,23 +199,21 @@ namespace MovieListerX
                             if (tconst.Contains(id, StringComparison.OrdinalIgnoreCase))
                             {
                                 foundMatchx = true;
-                                movie_imdb = this.IMDB;
-                                //MessageBox.Show("IMDB: " + IMDB, "Sonuc", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                search_imdb = this.IMDB;
                                 break;
+                            }
+                            else
+                            {
+                                foundMatchx = false;
                             }
                         }
 
                     }
                 }
-
-                if (!foundMatchx)
-                {
-                    
-                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("IMDB Hata olustu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("IMDB Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -240,22 +231,22 @@ namespace MovieListerX
 
                     if (originalTitle != "")
                     {
-                        List.Items.Add("Film Adi=" + originalTitle + "  " + "Film IMDB=" + movie_imdb + "  " + "Film Tarih:" + date);
+                        List.Items.Add(sub + " " + "Name" + originalTitle + "  " + sub + " " + "IMDB" + search_imdb + "  " + sub + " " + "Date" + date);
                     }
                     else
                     {
-                        List.Items.Add("Film Adi=" + primetitle + "  " + "Film IMDB=" + movie_imdb + "  " + "Film Tarih:" + date);
+                        List.Items.Add(sub + " " + "Name" + primetitle + "  " + sub + " " + "IMDB" + search_imdb + "  " + sub + " " + "Date" + date);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Film Bulunamadi");
+                    MessageBox.Show("Not Found");
                 }
 
             }
             else
             {
-                MessageBox.Show("Lutfen Dizi veya Film Seciniz");
+                MessageBox.Show("Please Enter Movie or Series");
             }
 
         }
