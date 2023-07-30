@@ -1,6 +1,8 @@
 using System.Diagnostics.Eventing.Reader;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System;
+using System.IO;
 
 namespace MovieListerX
 {
