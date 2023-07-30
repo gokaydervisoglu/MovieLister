@@ -222,11 +222,11 @@ namespace MovieListerX
 
                     if (originalTitle != "")
                     {
-                        List.Items.Add("||"+sub + " " + "Name: " +"  "+ originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
+                        List.Items.Add("||"+sub + " " + "Name: " + originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                     else
                     {
-                        List.Items.Add("||" + sub + " " + "Name: " + "  " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
+                        List.Items.Add("||" + sub + " " + "Name: " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                 }
                 else
