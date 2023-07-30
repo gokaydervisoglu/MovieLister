@@ -37,7 +37,7 @@ namespace MovieListerX
             }
             else
             {
-                sub = "series";
+                sub = "tvSeries";
             }
 
             double.TryParse(comboBox2.Text.Trim(), out double dt);
@@ -224,7 +224,7 @@ namespace MovieListerX
 
                     if (originalTitle != "")
                     {
-                        List.Items.Add("||"+sub + " " + "Name: " + originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
+                        List.Items.Add("||" + sub + " " + "Name: " + originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                     else
                     {

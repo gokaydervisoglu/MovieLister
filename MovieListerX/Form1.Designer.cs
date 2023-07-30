@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             textBox1 = new TextBox();
             button1 = new Button();
             groupBox1 = new GroupBox();
@@ -129,6 +130,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(741, 299);
             Controls.Add(label3);
             Controls.Add(comboBox2);
@@ -138,8 +140,9 @@
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(textBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
-            Text = "Form1";
+            Text = "Movie Lister";
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
