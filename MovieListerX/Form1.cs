@@ -167,10 +167,6 @@ namespace MovieListerX
                 {
                     raiting();
                 }
-                else
-                {
-                    foundMatchx = false;
-                }
             }
             catch (Exception ex)
             {
@@ -200,15 +196,10 @@ namespace MovieListerX
                             {
                                 foundMatchx = true;
                                 search_imdb = this.IMDB;
-                                break;
-                            }
-                            else
-                            {
-                                foundMatchx = false;
                             }
                         }
-
                     }
+
                 }
             }
             catch (Exception ex)
@@ -231,11 +222,11 @@ namespace MovieListerX
 
                     if (originalTitle != "")
                     {
-                        List.Items.Add(sub + " " + "Name" + originalTitle + "  " + sub + " " + "IMDB" + search_imdb + "  " + sub + " " + "Date" + date);
+                        List.Items.Add("||"+sub + " " + "Name: " +"  "+ originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                     else
                     {
-                        List.Items.Add(sub + " " + "Name" + primetitle + "  " + sub + " " + "IMDB" + search_imdb + "  " + sub + " " + "Date" + date);
+                        List.Items.Add("||" + sub + " " + "Name: " + "  " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                 }
                 else
