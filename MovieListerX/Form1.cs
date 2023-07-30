@@ -175,7 +175,6 @@ namespace MovieListerX
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public void raiting()
         {
             string filePath = "raiting.tsv";
@@ -213,7 +212,7 @@ namespace MovieListerX
         {
             if (comboBox2.Text == null)
             {
-                comboBox2.Text = "1990";
+                comboBox2.Text = "2000";
             }
             if (radioButton1.Checked == true || radioButton2.Checked == true)
             {
@@ -230,6 +229,20 @@ namespace MovieListerX
                     {
                         List.Items.Add("||" + sub + " " + "Name: " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
+
+                    string path = "list.dat";
+
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
+                    {
+                        foreach (string item in List.Items)
+                        {
+                            byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
+                            writer.Write(dirNameBytes.Length);
+                            writer.Write(dirNameBytes);
+                        }
+                    }
+
+
                 }
                 else
                 {
@@ -243,7 +256,6 @@ namespace MovieListerX
             }
 
         }
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -255,6 +267,59 @@ namespace MovieListerX
             {
                 radioButton1.Checked = false;
                 key = false;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+
+            string path = "list.dat";
+
+            if (File.Exists(path))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
+                {
+                    while (reader.BaseStream.Position < reader.BaseStream.Length)
+                    {
+                        int length = reader.ReadInt32();
+                        byte[] dirNameBytes = reader.ReadBytes(length);
+                        string dirName = System.Text.Encoding.UTF8.GetString(dirNameBytes);
+                        List.Items.Add(dirName);
+                    }
+                }
+            }
+            else
+            {
+                File.Create(path);
+            }
+        }
+
+        private void List_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                // Delete 
+                for (int i = List.Items.Count - 1; i >= 0; i--)
+                {
+                    if (List.GetItemChecked(i))
+                    {
+                        List.Items.RemoveAt(i);
+                    }
+                }
+            }
+
+            //Update
+            string path = "list.dat";
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
+            {
+                foreach (string item in List.Items)
+                {
+                    byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
+                    writer.Write(dirNameBytes.Length);
+                    writer.Write(dirNameBytes);
+                }
             }
         }
     }

@@ -75,6 +75,7 @@
             List.Name = "List";
             List.Size = new Size(509, 246);
             List.TabIndex = 0;
+            List.KeyDown += List_KeyDown;
             // 
             // label1
             // 
@@ -143,6 +144,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Movie Lister";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
