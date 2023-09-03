@@ -230,18 +230,7 @@ namespace MovieListerX
                         List.Items.Add("||" + sub + " " + "Name: " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
 
-                    string path = "list.dat";
-
-                    using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
-                    {
-                        foreach (string item in List.Items)
-                        {
-                            byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
-                            writer.Write(dirNameBytes.Length);
-                            writer.Write(dirNameBytes);
-                        }
-                    }
-
+                    writer();
 
                 }
                 else
@@ -272,27 +261,7 @@ namespace MovieListerX
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
-            string path = "list.dat";
-
-            if (File.Exists(path))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
-                {
-                    while (reader.BaseStream.Position < reader.BaseStream.Length)
-                    {
-                        int length = reader.ReadInt32();
-                        byte[] dirNameBytes = reader.ReadBytes(length);
-                        string dirName = System.Text.Encoding.UTF8.GetString(dirNameBytes);
-                        List.Items.Add(dirName);
-                    }
-                }
-            }
-            else
-            {
-                File.Create(path);
-            }
+            reader();
         }
 
         private void List_KeyDown(object sender, KeyEventArgs e)
@@ -309,10 +278,26 @@ namespace MovieListerX
                 }
             }
 
-            //Update
-            string path = "list.dat";
+            writer();
+        }
 
-            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
+        private void writer()
+        {
+            string folderName = "Skymoon";
+            string fileName = "list.dat";
+
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = Path.Combine(documentsPath, folderName);
+
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = Path.Combine(folderPath, fileName);
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Create)))
             {
                 foreach (string item in List.Items)
                 {
@@ -321,6 +306,38 @@ namespace MovieListerX
                     writer.Write(dirNameBytes);
                 }
             }
+        }
+        private void reader()
+        {
+            string folderName = "Skymoon";
+            string fileName = "list.dat";
+
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = Path.Combine(documentsPath, folderName);
+
+            string filePath = Path.Combine(folderPath, fileName);
+
+            if (File.Exists(filePath))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                {
+                    while (reader.BaseStream.Position < reader.BaseStream.Length)
+                    {
+                        int length = reader.ReadInt32();
+                        byte[] dirNameBytes = reader.ReadBytes(length);
+                        string dirName = System.Text.Encoding.UTF8.GetString(dirNameBytes);
+                        List.Items.Add(dirName);
+                    }
+                }
+            }
+            else
+            {
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+            }
+
         }
     }
 }
