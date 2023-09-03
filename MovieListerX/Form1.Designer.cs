@@ -29,46 +29,46 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            textBox1 = new TextBox();
-            button1 = new Button();
+            name = new TextBox();
+            btn_find = new Button();
             label1 = new Label();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            r_movie = new RadioButton();
+            r_series = new RadioButton();
             label3 = new Label();
-            comboBox2 = new ComboBox();
-            List = new CheckedListBox();
+            combo_date = new ComboBox();
+            ListX = new CheckedListBox();
             panel1 = new Panel();
-            button5 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            btn_fav = new Button();
+            btn_wt = new Button();
+            btn_unwt = new Button();
             label2 = new Label();
             pictureBox1 = new PictureBox();
-            button4 = new Button();
-            button6 = new Button();
+            btn_watch = new Button();
+            btn_search = new Button();
             panel2 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox1
+            // name
             // 
-            textBox1.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(250, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(158, 30);
-            textBox1.TabIndex = 0;
+            name.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            name.Location = new Point(250, 52);
+            name.Name = "name";
+            name.Size = new Size(158, 30);
+            name.TabIndex = 0;
             // 
-            // button1
+            // btn_find
             // 
-            button1.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(250, 88);
-            button1.Name = "button1";
-            button1.Size = new Size(158, 29);
-            button1.TabIndex = 1;
-            button1.Text = "Find";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btn_find.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_find.Location = new Point(250, 88);
+            btn_find.Name = "btn_find";
+            btn_find.Size = new Size(158, 29);
+            btn_find.TabIndex = 1;
+            btn_find.Text = "Find";
+            btn_find.UseVisualStyleBackColor = true;
+            btn_find.Click += button1_Click;
             // 
             // label1
             // 
@@ -81,32 +81,32 @@
             label1.TabIndex = 3;
             label1.Text = "Enter Name:";
             // 
-            // radioButton1
+            // r_movie
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton1.ForeColor = SystemColors.Window;
-            radioButton1.Location = new Point(250, 123);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(77, 27);
-            radioButton1.TabIndex = 4;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Movie";
-            radioButton1.UseVisualStyleBackColor = true;
-            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            r_movie.AutoSize = true;
+            r_movie.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            r_movie.ForeColor = SystemColors.Window;
+            r_movie.Location = new Point(250, 123);
+            r_movie.Name = "r_movie";
+            r_movie.Size = new Size(77, 27);
+            r_movie.TabIndex = 4;
+            r_movie.TabStop = true;
+            r_movie.Text = "Movie";
+            r_movie.UseVisualStyleBackColor = true;
+            r_movie.CheckedChanged += radioButton1_CheckedChanged;
             // 
-            // radioButton2
+            // r_series
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton2.ForeColor = SystemColors.Window;
-            radioButton2.Location = new Point(333, 123);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(75, 27);
-            radioButton2.TabIndex = 5;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Series";
-            radioButton2.UseVisualStyleBackColor = true;
+            r_series.AutoSize = true;
+            r_series.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            r_series.ForeColor = SystemColors.Window;
+            r_series.Location = new Point(333, 123);
+            r_series.Name = "r_series";
+            r_series.Size = new Size(75, 27);
+            r_series.TabIndex = 5;
+            r_series.TabStop = true;
+            r_series.Text = "Series";
+            r_series.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -119,33 +119,33 @@
             label3.TabIndex = 9;
             label3.Text = "Date (?-2023)";
             // 
-            // comboBox2
+            // combo_date
             // 
-            comboBox2.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "1970", "1980", "1990", "2000", "2010", "2020" });
-            comboBox2.Location = new Point(250, 214);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(158, 31);
-            comboBox2.TabIndex = 8;
+            combo_date.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            combo_date.FormattingEnabled = true;
+            combo_date.Items.AddRange(new object[] { "1970", "1980", "1990", "2000", "2010", "2020" });
+            combo_date.Location = new Point(250, 214);
+            combo_date.Name = "combo_date";
+            combo_date.Size = new Size(158, 31);
+            combo_date.TabIndex = 8;
             // 
-            // List
+            // ListX
             // 
-            List.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            List.FormattingEnabled = true;
-            List.HorizontalScrollbar = true;
-            List.Location = new Point(6, 9);
-            List.Name = "List";
-            List.Size = new Size(528, 454);
-            List.TabIndex = 0;
-            List.KeyDown += List_KeyDown;
+            ListX.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ListX.FormattingEnabled = true;
+            ListX.HorizontalScrollbar = true;
+            ListX.Location = new Point(6, 9);
+            ListX.Name = "ListX";
+            ListX.Size = new Size(528, 454);
+            ListX.TabIndex = 0;
+            ListX.KeyDown += List_KeyDown;
             // 
             // panel1
             // 
             panel1.BackColor = Color.DarkViolet;
-            panel1.Controls.Add(button5);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btn_fav);
+            panel1.Controls.Add(btn_wt);
+            panel1.Controls.Add(btn_unwt);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(-6, 0);
@@ -153,47 +153,49 @@
             panel1.Size = new Size(223, 513);
             panel1.TabIndex = 10;
             // 
-            // button5
+            // btn_fav
             // 
-            button5.BackColor = Color.DarkViolet;
-            button5.FlatAppearance.BorderColor = Color.DarkViolet;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.ForeColor = SystemColors.Window;
-            button5.Location = new Point(3, 290);
-            button5.Name = "button5";
-            button5.Size = new Size(223, 48);
-            button5.TabIndex = 5;
-            button5.Text = "Favorite List";
-            button5.UseVisualStyleBackColor = false;
+            btn_fav.BackColor = Color.DarkViolet;
+            btn_fav.FlatAppearance.BorderColor = Color.DarkViolet;
+            btn_fav.FlatStyle = FlatStyle.Flat;
+            btn_fav.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_fav.ForeColor = SystemColors.Window;
+            btn_fav.Location = new Point(3, 290);
+            btn_fav.Name = "btn_fav";
+            btn_fav.Size = new Size(223, 48);
+            btn_fav.TabIndex = 5;
+            btn_fav.Text = "Favorite List";
+            btn_fav.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btn_wt
             // 
-            button3.BackColor = Color.DarkViolet;
-            button3.FlatAppearance.BorderColor = Color.DarkViolet;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.ForeColor = SystemColors.Window;
-            button3.Location = new Point(3, 236);
-            button3.Name = "button3";
-            button3.Size = new Size(223, 48);
-            button3.TabIndex = 3;
-            button3.Text = "Unwatched List";
-            button3.UseVisualStyleBackColor = false;
+            btn_wt.BackColor = Color.DarkViolet;
+            btn_wt.FlatAppearance.BorderColor = Color.DarkViolet;
+            btn_wt.FlatStyle = FlatStyle.Flat;
+            btn_wt.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_wt.ForeColor = SystemColors.Window;
+            btn_wt.Location = new Point(3, 236);
+            btn_wt.Name = "btn_wt";
+            btn_wt.Size = new Size(223, 48);
+            btn_wt.TabIndex = 3;
+            btn_wt.Text = "Watched List";
+            btn_wt.UseVisualStyleBackColor = false;
+            btn_wt.Click += btn_wt_Click;
             // 
-            // button2
+            // btn_unwt
             // 
-            button2.BackColor = Color.DarkViolet;
-            button2.FlatAppearance.BorderColor = Color.DarkViolet;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.ForeColor = SystemColors.Window;
-            button2.Location = new Point(3, 182);
-            button2.Name = "button2";
-            button2.Size = new Size(223, 48);
-            button2.TabIndex = 2;
-            button2.Text = "Watched List";
-            button2.UseVisualStyleBackColor = false;
+            btn_unwt.BackColor = Color.DarkViolet;
+            btn_unwt.FlatAppearance.BorderColor = Color.DarkViolet;
+            btn_unwt.FlatStyle = FlatStyle.Flat;
+            btn_unwt.Font = new Font("Microsoft YaHei Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_unwt.ForeColor = SystemColors.Window;
+            btn_unwt.Location = new Point(3, 182);
+            btn_unwt.Name = "btn_unwt";
+            btn_unwt.Size = new Size(223, 48);
+            btn_unwt.TabIndex = 2;
+            btn_unwt.Text = "Unwatched List";
+            btn_unwt.UseVisualStyleBackColor = false;
+            btn_unwt.Click += btn_unwt_Click;
             // 
             // label2
             // 
@@ -216,30 +218,31 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // button4
+            // btn_watch
             // 
-            button4.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button4.Location = new Point(250, 268);
-            button4.Name = "button4";
-            button4.Size = new Size(77, 70);
-            button4.TabIndex = 11;
-            button4.Text = "Watch";
-            button4.UseVisualStyleBackColor = true;
+            btn_watch.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_watch.Location = new Point(250, 268);
+            btn_watch.Name = "btn_watch";
+            btn_watch.Size = new Size(77, 70);
+            btn_watch.TabIndex = 11;
+            btn_watch.Text = "Watch";
+            btn_watch.UseVisualStyleBackColor = true;
+            btn_watch.Click += btn_watch_Click;
             // 
-            // button6
+            // btn_search
             // 
-            button6.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button6.Location = new Point(333, 268);
-            button6.Name = "button6";
-            button6.Size = new Size(77, 70);
-            button6.TabIndex = 12;
-            button6.Text = "Search";
-            button6.UseVisualStyleBackColor = true;
+            btn_search.Font = new Font("Microsoft YaHei Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_search.Location = new Point(333, 268);
+            btn_search.Name = "btn_search";
+            btn_search.Size = new Size(77, 70);
+            btn_search.TabIndex = 12;
+            btn_search.Text = "Search";
+            btn_search.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
             panel2.BackColor = Color.DarkViolet;
-            panel2.Controls.Add(List);
+            panel2.Controls.Add(ListX);
             panel2.Location = new Point(452, 19);
             panel2.Name = "panel2";
             panel2.Size = new Size(540, 473);
@@ -253,16 +256,16 @@
             BackColor = Color.MediumOrchid;
             ClientSize = new Size(995, 513);
             Controls.Add(panel2);
-            Controls.Add(button6);
-            Controls.Add(button4);
+            Controls.Add(btn_search);
+            Controls.Add(btn_watch);
             Controls.Add(panel1);
             Controls.Add(label3);
-            Controls.Add(comboBox2);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
+            Controls.Add(combo_date);
+            Controls.Add(r_series);
+            Controls.Add(r_movie);
             Controls.Add(label1);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
+            Controls.Add(btn_find);
+            Controls.Add(name);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
@@ -279,22 +282,22 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox name;
+        private Button btn_find;
         private Label label1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton r_movie;
+        private RadioButton r_series;
         private Label label3;
-        private ComboBox comboBox2;
-        private CheckedListBox List;
+        private ComboBox combo_date;
+        private CheckedListBox ListX;
         private Panel panel1;
         private Label label2;
         private PictureBox pictureBox1;
-        private Button button2;
-        private Button button5;
-        private Button button3;
-        private Button button4;
-        private Button button6;
+        private Button btn_unwt;
+        private Button btn_fav;
+        private Button btn_wt;
+        private Button btn_watch;
+        private Button btn_search;
         private Panel panel2;
     }
 }

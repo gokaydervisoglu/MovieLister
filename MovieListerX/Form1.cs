@@ -3,6 +3,12 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System;
 using System.IO;
+using System.Diagnostics;
+using RestSharp;
+using System.Text;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MovieListerX
 {
@@ -14,7 +20,7 @@ namespace MovieListerX
         private bool foundMatch = false;
         private bool foundMatchx = false;
 
-
+        public string item;
         public string originalTitle;
         public string primetitle;
         public string IMDB;
@@ -28,7 +34,7 @@ namespace MovieListerX
 
         public void search()
         {
-            string maskedtxt = textBox1.Text.Trim();
+            string maskedtxt = name.Text.Trim();
             string filePath = "data.tsv";
 
             if (key == true)
@@ -40,7 +46,7 @@ namespace MovieListerX
                 sub = "tvSeries";
             }
 
-            double.TryParse(comboBox2.Text.Trim(), out double dt);
+            double.TryParse(combo_date.Text.Trim(), out double dt);
 
             try
             {
@@ -113,7 +119,7 @@ namespace MovieListerX
         }
         public void searchx()
         {
-            string maskedtxt = textBox1.Text.Trim();
+            string maskedtxt = name.Text.Trim();
             string filePath = "data.tsv";
 
             if (key == true)
@@ -125,7 +131,7 @@ namespace MovieListerX
                 sub = "series";
             }
 
-            double.TryParse(comboBox2.Text.Trim(), out double dt);
+            double.TryParse(combo_date.Text.Trim(), out double dt);
 
             try
             {
@@ -210,11 +216,11 @@ namespace MovieListerX
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox2.Text == null)
+            if (combo_date.Text == null)
             {
-                comboBox2.Text = "2000";
+                combo_date.Text = "2000";
             }
-            if (radioButton1.Checked == true || radioButton2.Checked == true)
+            if (r_movie.Checked == true || r_series.Checked == true)
             {
                 search();
 
@@ -223,11 +229,11 @@ namespace MovieListerX
 
                     if (originalTitle != "")
                     {
-                        List.Items.Add("||" + sub + " " + "Name: " + originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
+                        ListX.Items.Add("||" + sub + " " + "Name: " + originalTitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
                     else
                     {
-                        List.Items.Add("||" + sub + " " + "Name: " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
+                        ListX.Items.Add("||" + sub + " " + "Name: " + primetitle + "||" + sub + " " + "IMDB: " + search_imdb + "||" + sub + " " + "Date: " + date);
                     }
 
                     writer();
@@ -247,14 +253,14 @@ namespace MovieListerX
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (r_movie.Checked)
             {
-                radioButton2.Checked = false;
+                r_series.Checked = false;
                 key = true;
             }
             else
             {
-                radioButton1.Checked = false;
+                r_movie.Checked = false;
                 key = false;
             }
         }
@@ -269,11 +275,13 @@ namespace MovieListerX
             if (e.KeyCode == Keys.Delete)
             {
                 // Delete 
-                for (int i = List.Items.Count - 1; i >= 0; i--)
+                for (int i = ListX.Items.Count - 1; i >= 0; i--)
                 {
-                    if (List.GetItemChecked(i))
+                    if (ListX.GetItemChecked(i))
                     {
-                        List.Items.RemoveAt(i);
+                        string item = ListX.Items[i].ToString();
+                        ListX.Items.RemoveAt(i);
+                        writer2(item);
                     }
                 }
             }
@@ -282,6 +290,32 @@ namespace MovieListerX
         }
 
         private void writer()
+        {
+            string folderName = "Skymoon";
+            string fileName = "unlist.dat";
+
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = Path.Combine(documentsPath, folderName);
+
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = Path.Combine(folderPath, fileName);
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Create)))
+            {
+                foreach (string item in ListX.Items)
+                {
+                    byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
+                    writer.Write(dirNameBytes.Length);
+                    writer.Write(dirNameBytes);
+                }
+            }
+        }
+        private void writer2(string item)
         {
             string folderName = "Skymoon";
             string fileName = "list.dat";
@@ -299,15 +333,45 @@ namespace MovieListerX
 
             using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Create)))
             {
-                foreach (string item in List.Items)
-                {
-                    byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
-                    writer.Write(dirNameBytes.Length);
-                    writer.Write(dirNameBytes);
-                }
+
+                byte[] dirNameBytes = System.Text.Encoding.UTF8.GetBytes(item);
+                writer.Write(dirNameBytes.Length);
+                writer.Write(dirNameBytes);
             }
         }
         private void reader()
+        {
+            string folderName = "Skymoon";
+            string fileName = "unlist.dat";
+
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = Path.Combine(documentsPath, folderName);
+
+            string filePath = Path.Combine(folderPath, fileName);
+
+            if (File.Exists(filePath))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                {
+                    while (reader.BaseStream.Position < reader.BaseStream.Length)
+                    {
+                        int length = reader.ReadInt32();
+                        byte[] dirNameBytes = reader.ReadBytes(length);
+                        string dirName = System.Text.Encoding.UTF8.GetString(dirNameBytes);
+                        ListX.Items.Add(dirName);
+                    }
+                }
+            }
+            else
+            {
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+            }
+
+        }
+        private void reader2()
         {
             string folderName = "Skymoon";
             string fileName = "list.dat";
@@ -326,7 +390,7 @@ namespace MovieListerX
                         int length = reader.ReadInt32();
                         byte[] dirNameBytes = reader.ReadBytes(length);
                         string dirName = System.Text.Encoding.UTF8.GetString(dirNameBytes);
-                        List.Items.Add(dirName);
+                        ListX.Items.Add(dirName);
                     }
                 }
             }
@@ -339,5 +403,31 @@ namespace MovieListerX
             }
 
         }
+
+        private void btn_unwt_Click(object sender, EventArgs e)
+        {
+            ListX.Items.Clear();
+            reader();
+        }
+
+        private void btn_wt_Click(object sender, EventArgs e)
+        {
+            ListX.Items.Clear();
+            reader2();
+        }
+
+        private void btn_watch_Click(object sender, EventArgs e)
+        {
+            item = name.Text.Replace(" ", "-");
+
+            string url = "https://filmmax.org/" + item + "/";
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+
     }
 }
